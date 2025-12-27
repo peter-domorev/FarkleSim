@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36429.23 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarkleSim", "FarkleSim\FarkleSim.csproj", "{EB110B8B-228F-44E2-B2E2-688E06A33DDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB110B8B-228F-44E2-B2E2-688E06A33DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB110B8B-228F-44E2-B2E2-688E06A33DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB110B8B-228F-44E2-B2E2-688E06A33DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB110B8B-228F-44E2-B2E2-688E06A33DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72EED7EC-65C8-4663-953E-52B5AAA024E3}
+	EndGlobalSection
+EndGlobal
