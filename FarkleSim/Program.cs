@@ -7,22 +7,30 @@
             Dice dice = new Dice();
             Player player = new Player();
 
-
-            foreach(Dice d in player.Dice)
-            {
-                d.Roll();
-                Console.WriteLine(d.Number);
-            }
-
-
-
             ValueCalculator valueCalc = new ValueCalculator();
-            Dictionary<int, int> faceCounts = valueCalc.countFaces(player.Dice.ToList());
 
-            foreach(var kvp in faceCounts)
+
+
+
+
+
+            for (int i = 0; i < 100; i++)
             {
-                Console.WriteLine($"{kvp.Key}:{kvp.Value}");
+                Console.WriteLine("ROLL");
+                foreach (Dice die in player.Dice)
+                {
+                    die.Roll();
+                    Console.WriteLine($"{die.Number}");
+                }
+
+                foreach (TradeOption tradeOption in valueCalc.Calculate(player.Dice.ToList()))
+                {
+                    Console.WriteLine($"Number of dice to trade: {tradeOption.NumDice}, Score in Return: {tradeOption.Score}");
+                }
+
+                Console.WriteLine("ROLL\n\n");
             }
+
 
 
         }

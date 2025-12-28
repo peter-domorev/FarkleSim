@@ -13,6 +13,11 @@ namespace FarkleSim
 
         public int Number => _number;
 
+        public Dice()
+        {
+            Roll();
+        }
+
 
         public void Roll()
         {
