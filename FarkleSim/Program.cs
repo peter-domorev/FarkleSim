@@ -1,34 +1,36 @@
-﻿namespace FarkleSim
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace FarkleSim
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Dice dice = new Dice();
             Player player = new Player();
-
             ValueCalculator valueCalc = new ValueCalculator();
 
 
+            int numRolls = 100;
+            List<TradeOption>[] tradeOptions = new List<TradeOption>[numRolls];
 
-
-
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < numRolls;  i++)
             {
-                Console.WriteLine("ROLL");
-                foreach (Dice die in player.Dice)
-                {
-                    die.Roll();
-                    Console.WriteLine($"{die.Number}");
-                }
+                foreach (Dice dice in player.Dice) dice.Roll();
 
-                foreach (TradeOption tradeOption in valueCalc.Calculate(player.Dice.ToList()))
-                {
-                    Console.WriteLine($"Number of dice to trade: {tradeOption.NumDice}, Score in Return: {tradeOption.Score}");
-                }
-
-                Console.WriteLine("ROLL\n\n");
+                tradeOptions[i] = valueCalc.Calculate(player.Dice.ToList());
             }
+
+            int thresholdMax = 1000;
+            int numAboveMax = tradeOptions.Count(t => t.Sc>= thresholdMax);
+            Console.WriteLine($"Number above threshold: {numAboveMax}");
+
+
+
+
+
+
+
+     
 
 
 

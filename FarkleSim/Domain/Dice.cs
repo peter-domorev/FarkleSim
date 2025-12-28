@@ -25,5 +25,11 @@ namespace FarkleSim
             int roll = _rng.Next(NUM_FACES) + 1;
             _number = roll;
         }
+
+        // used to confrim that rng is not skewed
+        private void FlipRoll()
+        {
+            _number = 7 - _number;
+        }
     }
 }
