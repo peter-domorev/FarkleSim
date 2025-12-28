@@ -11,17 +11,29 @@ namespace FarkleSim
 
 
             int numRolls = 100;
-            List<TradeOption>[] tradeOptions = new List<TradeOption>[numRolls];
+            int thresholdMax = 1000;
+            bool[] isAboveThreshold = new bool[numRolls];
 
+
+
+            int maxTradeScore;
             for (int i = 0; i < numRolls;  i++)
             {
                 foreach (Dice dice in player.Dice) dice.Roll();
 
-                tradeOptions[i] = valueCalc.Calculate(player.Dice.ToList());
+                List<TradeOption> tradeOptions = valueCalc.Calculate(player.Dice.ToList());
+                maxTradeScore = tradeOptions.Max(t => t.Score);
+
+                if (maxTradeScore >= thresholdMax)
+                {
+                    isAboveThreshold[i] = true;
+                }
+                else isAboveThreshold[i] = false;
+
+
             }
 
-            int thresholdMax = 1000;
-            int numAboveMax = tradeOptions.Count(t => t.Sc>= thresholdMax);
+            int numAboveMax = isAboveThreshold.Count(b => b == true);
             Console.WriteLine($"Number above threshold: {numAboveMax}");
 
 
