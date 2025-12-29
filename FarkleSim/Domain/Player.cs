@@ -6,22 +6,29 @@ using System.Threading.Tasks;
 
 namespace FarkleSim
 {
-    public class Player
+    public abstract class Player : IPlayer
     {
         private const int NUM_DICE = 6;
-        private Dice[] _dice = new Dice[NUM_DICE];
+        protected List<Dice> _dice = new List<Dice>();
 
-        public Dice[] Dice => _dice;
+        protected ValueCalculator _valueCalc = new ValueCalculator();
+        protected TradeOptionsSorter _sorter = new TradeOptionsSorter();
+
+        public List<Dice> Dice => _dice;
 
         public Player()
         {
-            for(int i = 0; i < NUM_DICE; i++)
+            for (int i = 0; i < NUM_DICE; i++)
             {
-                _dice[i] = new Dice();
+                _dice.Add(new Dice());
             }
         }
 
-        
+        public abstract int PlayTurn();
 
+        protected void RollDice()
+        {
+            foreach (Dice dice in _dice) dice.Roll();
+        }
     }
 }

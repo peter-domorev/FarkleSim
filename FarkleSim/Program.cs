@@ -6,16 +6,27 @@ namespace FarkleSim
     {
         static void Main(string[] args)
         {
-            Player player = new Player();
             ValueCalculator valueCalc = new ValueCalculator();
 
+            Conservative1 consPlayer = new Conservative1();
+
+            int numTurns = 10000;
+            int[] scores = new int[numTurns];
+
+            for (int i = 0; i < numTurns; i++)
+            {
+                int score = consPlayer.PlayTurn();
+                Console.WriteLine($"Score: {score}");
+                scores[i] = score;
+            }
+
+            double mean = scores.Average();
+            Console.WriteLine($"Mean: {mean}");
 
 
 
-            MultipleGames multipleGames = new MultipleGames();
-            InitialRollScores initialRoll = new InitialRollScores();
-            //initialRoll.Run(valueCalc, player);
-            multipleGames.Run(valueCalc, player);
+
+            
 
 
 
