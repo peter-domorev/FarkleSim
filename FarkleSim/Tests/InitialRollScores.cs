@@ -20,7 +20,6 @@ namespace FarkleSim
                     Console.WriteLine($"{die.Number}");
                 }
 
-                TradeOptions tradeOptions = valueCalc.Calculate(player.Dice.ToList());
 
                 foreach (TradeOption tradeOption in valueCalc.Calculate(player.Dice.ToList()).Options)
                 {

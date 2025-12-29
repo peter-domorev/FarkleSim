@@ -16,7 +16,7 @@ namespace FarkleSim
             int[] maxScores = new int[numRuns];
             int maxValue;
 
-            int numMetaRuns = 1000;
+            int numMetaRuns = 100000;
             double[] sampleAverages = new double[numMetaRuns];
 
             for (int j = 0; j < numMetaRuns; j++)
@@ -30,16 +30,15 @@ namespace FarkleSim
                         dice.Roll();
                     }
 
-                    List<TradeOption> tradeOptions = new List<TradeOption>();
-                    tradeOptions = valueCalc.Calculate(player.Dice.ToList());
+                    TradeOptions tradeOptions = valueCalc.Calculate(player.Dice.ToList());
 
-                    if (tradeOptions.Count == 0)
+                    if (tradeOptions.Options.Count == 0)
                     {
                         maxScores[i] = 0;
                         continue;
                     }
 
-                    maxValue = tradeOptions.Max(t => t.Score);
+                    maxValue = tradeOptions.Options.Max(t => t.Score);
 
 
                     maxScores[i] = maxValue;
