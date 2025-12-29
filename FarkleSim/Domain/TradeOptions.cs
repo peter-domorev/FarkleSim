@@ -16,11 +16,6 @@ namespace FarkleSim
             _options.Add(new TradeOption(numDice, score));
         }
 
-        public void Add(List<TradeOption> tradeOptions)
-        {
-            _options.AddRange(tradeOptions);
-        }
-
         public void Add(TradeOption tradeOption)
         {
             _options.Add(tradeOption);
@@ -44,6 +39,11 @@ namespace FarkleSim
                 int newScore = oldTradeOption.Score + combinerTradeOption.Score;
                 Add(newNumDice, newScore);
             }
+        }
+        public void Combine(int numDice, int score)
+        {
+            TradeOption combinerTradeOption = new TradeOption(numDice, score);
+            Combine(combinerTradeOption);
         }
     }
 }

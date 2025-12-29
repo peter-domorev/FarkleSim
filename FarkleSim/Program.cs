@@ -10,6 +10,25 @@ namespace FarkleSim
             ValueCalculator valueCalc = new ValueCalculator();
 
 
+
+
+            MultipleGames multipleGames = new MultipleGames();
+            InitialRollScores initialRoll = new InitialRollScores();
+            //initialRoll.Run(valueCalc, player);
+            multipleGames.Run(valueCalc, player);
+
+
+
+
+
+
+
+
+
+
+
+
+            /*
             int numRolls = 100;
             int thresholdMax = 1000;
             bool[] isAboveThreshold = new bool[numRolls];
@@ -35,7 +54,7 @@ namespace FarkleSim
 
             int numAboveMax = isAboveThreshold.Count(b => b == true);
             Console.WriteLine($"Number above threshold: {numAboveMax}");
-
+            */
 
 
 

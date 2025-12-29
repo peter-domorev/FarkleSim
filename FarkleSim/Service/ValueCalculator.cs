@@ -13,117 +13,84 @@ namespace FarkleSim
 
 
 
-        public List<TradeOption> Calculate(List<Dice> dice)
+        public TradeOptions Calculate(List<Dice> dice)
         {
-            TradeOptions tradeOptions = new TradeOptions();
             Dictionary<int, int> faceCounts = countFaces(dice);
 
 
-            // count only basic chunks
-            List<TradeOption> chunckTradeOptions = calculateChunks(dice);
-            tradeOptions.Add(chunckTradeOptions);
 
 
-
-            // now deal with singles combinations
             int numOnes = faceCounts[1];
             int numFives = faceCounts[5];
-
-            tradeOptions.Add(calculateSinglesCombinations(1, numOnes, ScoreCombination.SingleOne, dice));
-            tradeOptions.Add(calculateSinglesCombinations(5, numFives, ScoreCombination.SingleFive, dice));
-
-            // deal with doubles combinations
-            tradeOptions.Add(calculateDoublesCombinations(numOnes, numFives, dice));
+            TradeOptions tradeOptions = calculateAllCombos(numOnes, numFives, dice);
 
 
 
            
 
 
-            return tradeOptions.Options;
+            return tradeOptions;
         }
 
 
-        private TradeOptions calculateDoublesCombinations(int numOnes, int numFives, List<Dice> dice)
+
+        private TradeOptions calculateAllCombos(int numOnes, int numFives, List<Dice> dice)
         {
             TradeOptions tradeOptions = new TradeOptions();
 
-            List<Dice> otherDice = dice; // seperate other dice
 
-            for (int numOnesToTrade = 1; numOnesToTrade <= numOnes; numOnesToTrade++)
+            // get vanilla chunk trade options
+            TradeOptions chunkTradeOptions = calculateChunks(dice);
+            tradeOptions.Add(chunkTradeOptions);
+
+
+
+            List<Dice> removeOnesDice = dice;
+            List<Dice> removeFivesDice;
+            int numOnesToTrade = 0; int numFivesToTrade = 0;
+
+            for (numOnesToTrade = 0; numOnesToTrade <= numOnes; numOnesToTrade++)
             {
-                otherDice.Remove(dice.Find(d => d.Number == 1)); // remove for combinations
+                removeFivesDice = removeOnesDice;
 
 
-                for (int numFivesToTrade = 1; numFivesToTrade <= numFives; numFivesToTrade++)
+                for (numFivesToTrade = 0; numFivesToTrade <= numFives; numFivesToTrade++)
                 {
+                    if (numOnesToTrade == 0 && numFivesToTrade == 0) continue;
+
+
+                    removeFivesDice.Remove(dice.Find(d => d.Number == 5)); // remove for further combinations
+
+                    // get singles trade options
                     int numDice = numOnesToTrade + numFivesToTrade;
                     int score = numOnesToTrade * (int)ScoreCombination.SingleOne + numFivesToTrade * (int)ScoreCombination.SingleFive;
+                    TradeOption singlesTradeOption = new TradeOption(numDice, score); // keep to combine with chunks
+                    tradeOptions.Add(singlesTradeOption);
+
+                    // get leftover chunk trade options
+                    TradeOptions leftoverChunkTradeOptions = calculateChunks(removeFivesDice);
+                    // then combine with singles trade options
+                    leftoverChunkTradeOptions.Combine(singlesTradeOption);
+                    tradeOptions.Add(leftoverChunkTradeOptions);
 
 
-                    TradeOption individualTradeOption = new TradeOption(numDice, score);
-                    tradeOptions.Add(individualTradeOption);
-
-
-
-                    otherDice.Remove(dice.Find(d => d.Number == 5));
-                    List<TradeOption> otherTradeOptions = calculateChunks(otherDice); // find all other chunks
-
-                    // add new combined chunks
-                    TradeOptions combinedTradeOptions = new TradeOptions();
-                    combinedTradeOptions.Add(otherTradeOptions);
-                    combinedTradeOptions.Combine(individualTradeOption);
-                    tradeOptions.Add(combinedTradeOptions);
                 }
+
+
+
+                removeOnesDice.Remove(dice.Find(d => d.Number == 1)); // remove for further combinations
+
             }
-            return tradeOptions;
-
-        }
-
-        /// <summary>
-        /// Calculates all combinations with single 5 or single 1 and chunks
-        /// </summary>
-        /// <param name="single"></param>
-        /// <param name="numSingles"></param>
-        /// <param name="dice"></param>
-        /// <returns></returns>
-        private TradeOptions calculateSinglesCombinations(int single, int numSingles, ScoreCombination valueOfSingle, List<Dice> dice)
-        {
-            TradeOptions tradeOptions = new TradeOptions();
-
-            // just deal with 1's or 5's and combined chunks
-            for (int numSinglesToTrade = 1; numSinglesToTrade <= numSingles; numSinglesToTrade++)
-            {
-                int numDice = numSinglesToTrade; int score = numSinglesToTrade * (int)valueOfSingle;
-                TradeOption individualTradeOption = new TradeOption(numDice, score);
-                tradeOptions.Add(individualTradeOption);
-
-                // deal with other chunks
 
 
-                //if (numSinglesToTrade <= dice.Count - 3) // no other chunks can be formed
-                
-                List<Dice> otherDice = dice; // seperate other dice
-                otherDice.Remove(dice.First(d => d.Number == single)); // returns a bool
-                List<TradeOption> otherTradeOptions = calculateChunks(otherDice); // find all other chunks
-
-
-                TradeOptions combinedTradeOptions = new TradeOptions();
-                combinedTradeOptions.Add(otherTradeOptions);
-                combinedTradeOptions.Combine(individualTradeOption);
-
-                tradeOptions.Add(combinedTradeOptions);
-
-                
-            }
+            
 
             return tradeOptions;
         }
 
 
 
-
-        private List<TradeOption> calculateChunks(List<Dice> dice)
+        private TradeOptions calculateChunks(List<Dice> dice)
         {
             TradeOptions tradeOptions = new TradeOptions();
             Dictionary<int, int> faceCounts = countFaces(dice);
@@ -152,7 +119,7 @@ namespace FarkleSim
                     break;
             }
 
-            return tradeOptions.Options;
+            return tradeOptions;
         }
 
 
