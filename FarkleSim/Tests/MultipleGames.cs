@@ -9,6 +9,7 @@ namespace FarkleSim
 {
     public class MultipleGames
     {
+        private TradeOptionsSorter _sorter = new TradeOptionsSorter();
         public void Run(ValueCalculator valueCalc, Player player)
         {
 
@@ -16,8 +17,9 @@ namespace FarkleSim
             int[] maxScores = new int[numRuns];
             int maxValue;
 
-            int numMetaRuns = 100000;
+            int numMetaRuns = 2;
             double[] sampleAverages = new double[numMetaRuns];
+
 
             for (int j = 0; j < numMetaRuns; j++)
             {
@@ -31,14 +33,16 @@ namespace FarkleSim
                     }
 
                     TradeOptions tradeOptions = valueCalc.Calculate(player.Dice.ToList());
+                    TradeOptions cleanedTradeOptions = _sorter.RemoveUselessOptions(tradeOptions);
 
-                    if (tradeOptions.Options.Count == 0)
+
+                    if (cleanedTradeOptions.Options.Count == 0)
                     {
                         maxScores[i] = 0;
                         continue;
                     }
 
-                    maxValue = tradeOptions.Options.Max(t => t.Score);
+                    maxValue = cleanedTradeOptions.Options.Max(t => t.Score);
 
 
                     maxScores[i] = maxValue;

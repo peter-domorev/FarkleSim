@@ -24,6 +24,10 @@ namespace FarkleSim
         {
             _options.AddRange(tradeOptions.Options);
         }
+        public void Add(List<TradeOption> tradeOptions)
+        {
+            _options.AddRange(tradeOptions);
+        }
 
         /// <summary>
         /// Add one trade option to all other trade options

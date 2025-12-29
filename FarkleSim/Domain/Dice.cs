@@ -23,7 +23,7 @@ namespace FarkleSim
         {
             const int NUM_FACES = 6;
             int roll = _rng.Next(NUM_FACES) + 1;
-            _number = roll; 
+            _number = roll;
         }
 
         // used to confrim that rng is not skewed
