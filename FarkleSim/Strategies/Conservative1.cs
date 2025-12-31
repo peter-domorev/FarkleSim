@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FarkleSim
 {
+    /*
     public class Conservative1 : Player, IPlayer
     {
         public override int PlayTurn()
@@ -14,6 +15,10 @@ namespace FarkleSim
 
             Decision decision = Decision.RollAgain;
 
+            // RollDiceGetTrades needs to be implemented
+            // average score of about 300
+
+            /* 
             List<Dice> currentHandDice = _dice.ToList();
 
 
@@ -29,7 +34,7 @@ namespace FarkleSim
                 
 
                 TradeOptions tradeOptions = _valueCalc.Calculate(currentHandDice);
-                tradeOptions = _sorter.RemoveUselessOptions(tradeOptions);
+                tradeOptions = _sorter.Clean(tradeOptions);
 
                 int bigThreshold = 50;
                 if (tradeOptions.Options.Count == 0)
@@ -54,10 +59,11 @@ namespace FarkleSim
                     decision = Decision.RollAgain;
                 }
             }
-
+            
             return score;
             
 
         }
-    }
+    }*/
+
 }

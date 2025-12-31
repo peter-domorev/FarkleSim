@@ -9,23 +9,30 @@ namespace FarkleSim
         {
             ValueCalculator valueCalc = new ValueCalculator();
 
-            Conservative1 consPlayer = new Conservative1();
+            GainFactorV1 gainV1 = new GainFactorV1();
 
-            /*
+            
+            // get a players average
             int numTurns = 10000;
             int[] scores = new int[numTurns];
 
             for (int i = 0; i < numTurns; i++)
             {
-                int score = consPlayer.PlayTurn();
+                Console.WriteLine("NEW ROUND!\n\n\n");
+                int score = gainV1.PlayTurn();
                 Console.WriteLine($"Score: {score}");
                 scores[i] = score;
             }
 
             double mean = scores.Average();
-            Console.WriteLine($"Mean: {mean}");*/
+            Console.WriteLine($"Mean: {mean}\n\n\n");
 
 
+
+
+
+            // calculate means, and bust rates of everything
+            /*
             // make 6 dice
             List<Dice> dice = new List<Dice>();
             int maxNumDice = 6;
@@ -89,7 +96,7 @@ namespace FarkleSim
                 Console.WriteLine($"Number of dice: {numDice}, Mean: {means[numDice - 1]}, Std: {stds[numDice - 1]}");
                 Console.WriteLine($"Percentage bust: {percentBust[numDice - 1]}");
             }
-
+            */
 
 
 

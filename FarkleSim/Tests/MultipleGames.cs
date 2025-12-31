@@ -33,7 +33,7 @@ namespace FarkleSim
                     }
 
                     TradeOptions tradeOptions = valueCalc.Calculate(player.Dice.ToList());
-                    TradeOptions cleanedTradeOptions = _sorter.RemoveUselessOptions(tradeOptions);
+                    TradeOptions cleanedTradeOptions = _sorter.Clean(tradeOptions);
 
 
                     if (cleanedTradeOptions.Options.Count == 0)

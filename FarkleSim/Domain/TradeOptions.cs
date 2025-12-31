@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace FarkleSim
     {
         private List<TradeOption> _options = new List<TradeOption>();
         public List<TradeOption> Options => _options;
+
+        public bool IsBust => _options.Count == 0;
 
         public void Add(int numDice, int score)
         {
@@ -49,5 +52,31 @@ namespace FarkleSim
             TradeOption combinerTradeOption = new TradeOption(numDice, score);
             Combine(combinerTradeOption);
         }
+
+        public int GetScore(int numDiceToTrade)
+        {
+            if (IsBust) return 0;
+            if (numDiceToTrade == 0) return 0;
+            return Options.FirstOrDefault(t => t.NumDice == numDiceToTrade).Score;
+        }
+
+        public int GetMaxScore()
+        {
+            if (IsBust) return 0;
+            return Options.Max(t => t.Score);
+        }
+
+        public int GetNumDice(int score)
+        {
+            return Options.FirstOrDefault(t => t.Score == score)?.NumDice ?? 0;
+        }
+
+        public int GetMinNumDice()
+        {
+            if (IsBust) return 0;
+            return Options.Min(t => t.NumDice);
+        }
+
+        
     }
 }

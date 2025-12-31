@@ -8,7 +8,7 @@ namespace FarkleSim
 {
     public class TradeOptionsSorter
     {
-        public TradeOptions RemoveUselessOptions(TradeOptions tradeOptions)
+        public TradeOptions Clean(TradeOptions tradeOptions)
         {
             TradeOptions cleanedTradeOptions = new TradeOptions();
 
