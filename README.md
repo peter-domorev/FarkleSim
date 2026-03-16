@@ -1,14 +1,16 @@
 # Farkle Simulator
 
-Simulation of the dice-based board game Farkle.
+Simulation of the dice-based game Farkle used to test different gameplay strategies.
 
 ## Features
-- Can simulate millions of games instantly
-- Can define a strategy in a single script
+- Simulate millions of games quickly
+- Define custom strategies through a single script
+- Compare outcomes between different strategies
 
 ## Installation
 git clone https://github.com/peter-domorev/FarkleSim
 
 ## What I Learned
-- I consolidated what I learnt in a OOP unit at uni and was able to avoid making early mistakes in the architecture
-- When working on a project where I'm not sure how the entire thing will look, if I make progress on the current problems, eventually I will have a complete project
+- Applied object-oriented programming concepts learned in university.
+- Improved my ability to design program architecture before implementation.
+- Learned to iteratively build systems even when the final structure is not fully known at the start.
